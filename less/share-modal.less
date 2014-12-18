@@ -14,7 +14,7 @@
     overflow-x: hidden;
     
     a {
-        color: #7a96cc;
+        color: @brand-primary;
         &:hover,
         &:focus {
         color: #667ca9;
@@ -35,11 +35,11 @@
             font-weight: bold;
             text-decoration: none;
             padding: 10px;
-            background-color: #7a96cc;
+            background-color: @brand-primary;
             color: #fff;
             &:hover,
             &:focus {
-            background-color: #bccae5;
+            background-color: lighten(@brand-primary, 20%);
             color: #fff;
             }
         }
@@ -94,7 +94,7 @@
         margin-top: 5px;
         padding: 5px;
         text-decoration: none;
-        background-color: #7a96cc;
+        background-color: @brand-primary;
         color: #fff;
         &:hover,
         &:focus {
@@ -161,12 +161,12 @@
         font-weight: bold;
         text-decoration: none;
         padding: 10px;
-        background-color: #7a96cc;
+        background-color: @brand-primary;
         color: #fff;
         
         &:hover,
         &:focus {
-        background-color: #bccae5;
+        background-color: lighten(@brand-primary, 20%);
         color: #fff;
         }
     }
