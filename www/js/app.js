@@ -139,7 +139,6 @@ var setupAudio = function() {
 
 var onAudioEnded = function(e) {
     $credits.fadeIn();
-    $audioPlayer.jPlayer('stop')
     $pause.hide();
     $play.show();
 
