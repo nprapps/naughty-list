@@ -2,13 +2,16 @@
 var $shareModal = null;
 var $commentCount = null;
 var $audioPlayer = null;
+var $playerWrapper = null;
 var $currentTime = null;
 var $play = null;
 var $pause = null;
 var $goButton = null;
-var $filmstrip = $('.filmstrip-wrapper');
-var $filmstripWrapper = $('.filmstrip-outer-wrapper');
+var $filmstrip = null;
+var $filmstripWrapper = null;
 var $video = null;
+var $videoWrapper = null;
+var $credits = null;
 
 // Global state
 var firstShareLoad = true;
@@ -30,6 +33,11 @@ var onDocumentLoad = function(e) {
     $pause = $('.pause');
     $goButton = $('.js-go');
     $video = $('.covervid-video');
+    $videoWrapper = $('.covervid-wrapper');
+    $filmstrip = $('.filmstrip-wrapper');
+    $filmstripWrapper = $('.filmstrip-outer-wrapper');
+    $credits = $('.slide-credits');
+    $playerWrapper = $('.player');
 
     // Bind events
     $shareModal.on('shown.bs.modal', onShareModalShown);
@@ -56,9 +64,8 @@ var onDocumentLoad = function(e) {
 }
 
 var hideIntro = function() {
-    console.log(hideIntro);
-    $('.slide-card-closed .content-wrapper').fadeIn();
-    $('.slide-card-open .content-wrapper').fadeOut();
+    $videoWrapper.fadeOut();
+    $filmstripWrapper.fadeOut();
 }
 
 var sizeFilmstrip = function() {
@@ -115,15 +122,8 @@ var setupAudio = function() {
 }
 
 var onAudioEnded = function(e) {
-    var time = e.jPlayer.status.currentTime;
-
-    if (time != 0 && time != e.jPlayer.status.duration) {
-        // End fired prematurely
-        console.log(e.jPlayer.status.currentTime);
-        console.log(e.jPlayer.status.currentPercentAbsolute);
-        console.log(e.jPlayer.status.currentPercentRelative);
-        console.log(e.jPlayer.status.duration);
-    }
+    $credits.fadeIn();
+    $playerWrapper.fadeOut();
 }
 
 /*

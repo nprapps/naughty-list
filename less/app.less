@@ -119,6 +119,77 @@ html {
 	display: none;
 }
 
+.slide-credits {
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+	text-align: center;
+	display: none;
+	background: rgba(0,0,0,0.4);
+
+	.content-wrapper {
+		max-width: 500px;
+		margin: 0 auto;
+		color: #fff;
+
+		h2 {
+			text-align: center;
+			text-transform: uppercase;
+			letter-spacing: 0.2rem;
+		}
+
+		h3 {
+			font-size: .875rem;
+			text-transform: uppercase;
+			font-family: 'Knockout 31 4r';
+			letter-spacing: 0.1rem;
+		}
+
+		dl,
+		p {
+			font-size: @font-size-base * 0.875;
+		}
+
+		dl {
+			clear: both;
+
+			+ h3 {
+				margin-top: 4rem;
+			}
+		}
+
+		dd,
+		dt {
+			width: 50%;
+		}
+
+		dt {
+			float: left;
+			clear: left;
+			text-align: right;
+			padding-right: 0.5rem;
+			font-weight: normal;
+			text-transform: uppercase;
+			letter-spacing: 0.1rem;
+		}
+
+		dd {
+			float: right;
+			clear: right;
+			padding-left: 0.5rem;
+			text-align: left;
+		}
+
+		.names {
+			text-transform: uppercase;
+			letter-spacing: 0.1rem;
+		}
+
+		.promo {
+			margin-top: 4rem;
+		}
+	}
+}
+
 .covervid-wrapper {
     position: absolute;
     top: 0;
@@ -166,7 +237,7 @@ html {
 	right: 0;
 	bottom: 0;
 	height: 5rem;
-	background: #333;
+	background: fadeout(#333, 20%);
 	line-height: 5rem;
 
 	&.slide-in {
@@ -187,7 +258,7 @@ html {
 		left: 5rem;
 		top: 0;
 		bottom: 0;
-		right: 5rem;
+		right: 0;
 
 		.bar {
 			position: absolute;
@@ -195,14 +266,19 @@ html {
 			top: 0;
 			bottom: 0;
 			left: 0;
-			background-color: #444;
+			background-color: fadeout(#444, 20%);
 		}
 	}
 	.playback-info {
-		right: 5.5rem;
+		right: 1rem;
 		text-align: right;
 		line-height: 1;
 		position: absolute;
+	}
+
+	.current-time {
+		color: #fff;
+		line-height: 5rem;
 	}
 }
 
