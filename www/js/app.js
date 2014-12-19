@@ -15,6 +15,7 @@ var $credits = null;
 var $slideCardOpen = null;
 var $slideCardClosed = null;
 var $creditsButton = null;
+var $downloadButton = null;
 
 // Global state
 var firstShareLoad = true;
@@ -44,6 +45,7 @@ var onDocumentLoad = function(e) {
     $slideCardOpen = $('.slide-card-open');
     $slideCardClosed = $('.slide-card-closed');
     $creditsButton = $('.toggle-credits-button');
+    $downloadButton = $('.js-click-download');
 
 
     // Bind events
@@ -53,6 +55,7 @@ var onDocumentLoad = function(e) {
     $pause.on('click', onPauseClick);
     $goButton.on('click', onGoClick);
     $creditsButton.on('click', onCreditsButtonClick);
+    $downloadButton.on('click', onDownloadButtonClick);
     $(window).on('resize', onWindowResize);
 
     // configure ZeroClipboard on share panel
@@ -71,10 +74,12 @@ var onDocumentLoad = function(e) {
     $video.on('ended', hideIntro);
 }
 
+var onDownloadButtonClick = function() {
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'download audio']);
+}
+
 var onCreditsButtonClick = function() {
     $credits.fadeToggle();
-    console.log('toggle')
-
 }
 
 var hideIntro = function() {
@@ -137,6 +142,8 @@ var onAudioEnded = function(e) {
     $audioPlayer.jPlayer('stop')
     $pause.hide();
     $play.show();
+
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'audio completed']);
 }
 
 /*
@@ -157,6 +164,7 @@ var onGoClick = function(e) {
     $pause.show();
     $('.player').addClass('slide-in');
     $('.slide-card-closed .content-wrapper').fadeOut();
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'start audio']);
 
     _.delay(function() {
         if (Modernizr.touch) {
