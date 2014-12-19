@@ -15,7 +15,7 @@ NAMES
 """
 # Project name to be used in urls
 # Use dashes, not underscores!
-PROJECT_SLUG = 'naughty-list'
+PROJECT_SLUG = 'naughty-or-nice'
 
 # Project name to be used in file paths
 PROJECT_FILENAME = 'naughty_list'

@@ -12,12 +12,14 @@ var $filmstripWrapper = null;
 var $video = null;
 var $videoWrapper = null;
 var $credits = null;
+var $slideCardOpen = null;
+var $slideCardClosed = null;
 
 // Global state
 var firstShareLoad = true;
 var audioFile = '/assets/audio/elves.mp3';
-var filmstripAspectWidth = 720;
-var filmstripAspectHeight = 528;
+var filmstripAspectWidth = 1280;
+var filmstripAspectHeight = 720;
 var filmstripAspectRatio = filmstripAspectWidth / filmstripAspectHeight;
 
 /*
@@ -38,6 +40,9 @@ var onDocumentLoad = function(e) {
     $filmstripWrapper = $('.filmstrip-outer-wrapper');
     $credits = $('.slide-credits');
     $playerWrapper = $('.player');
+    $slideCardOpen = $('.slide-card-open');
+    $slideCardClosed = $('.slide-card-closed');
+
 
     // Bind events
     $shareModal.on('shown.bs.modal', onShareModalShown);
@@ -59,20 +64,19 @@ var onDocumentLoad = function(e) {
     setupAudio();
     sizeFilmstrip();
     setupCSSAnimations();
-    $video.coverVid(640, 360);
+    $video.coverVid(1280, 720);
     $video.on('ended', hideIntro);
 }
 
 var hideIntro = function() {
-    $videoWrapper.fadeOut();
-    $filmstripWrapper.fadeOut();
+    $('.filmstrip').addClass('done').removeClass('animated');
+    $slideCardOpen.fadeIn();
 }
 
 var sizeFilmstrip = function() {
     var windowAspectRatio = $(window).width() / $(window).height();
 
     if (windowAspectRatio < filmstripAspectRatio) {
-        console.log($filmstripWrapper.height())
         var filmstripWidth = Math.ceil($filmstripWrapper.height() * filmstripAspectWidth) / filmstripAspectHeight;
         $filmstrip.width(filmstripWidth + 'px').height('100%');
     } else {
@@ -85,7 +89,7 @@ var sizeFilmstrip = function() {
 var setupCSSAnimations = function() {
     var prefixes = [ '-webkit-', '-moz-', '-o-', '' ];
     var keyframes = '';
-    var filmstripSteps = 59;
+    var filmstripSteps = 14;
 
     for (var i = 0; i < prefixes.length; i++) {
 
@@ -96,8 +100,6 @@ var setupCSSAnimations = function() {
         }
         keyframes += '@' + prefixes[i] + 'keyframes filmstrip {' + filmstrip + '}';
     }
-
-    var test = 'h1 { color: red !important; }';
 
     var $s = $('<style type="text/css"></style>');
     $s.html(keyframes);

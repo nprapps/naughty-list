@@ -10,7 +10,8 @@
     <div class="slide slide-card-closed">
         <div class="covervid-wrapper">
             <video class="covervid-video" poster="./assets/tape.jpg">
-                <source src="./assets/cassette.m4v" type="video/mp4">
+                <source src="./assets/elves1.mp4" type="video/mp4">
+                <source src="./assets/elves1.webm" type="video/webm">
             </video>
         </div>
 
@@ -21,8 +22,6 @@
         </div>
 
         <div class="content-wrapper">
-            <h1>{{ COPY.content.project_name }}</h1>
-
             <a class="btn btn-lg btn-primary js-go" href="#"><i class="fa fa-play"></i> Go</a>
         </div>
     </div>
@@ -33,13 +32,15 @@
 
     <div class="slide slide-credits">
         <div class="content-wrapper">
+            <p class="share-prompt">Send this card to a friend!</p>
+            <p><a class="comment-button btn btn-lg btn-primary comment-button-article" data-toggle="modal" data-backdrop="static" data-target="#share-modal"><i class="fa fa-share"></i> Share</a></p>
             <h2>Credits</h2>
 
             <h3>Cast</h3>
             {% for castmember in COPY.cast %}
             <dl>
                 <dt>{{ castmember.name }}</dt>
-                <dd>{{ castmember.character }}</dd>
+                <dd>{{ castmember.character|smarty }}</dd>
             </dl>
             {% endfor %}
 

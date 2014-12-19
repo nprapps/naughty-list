@@ -61,6 +61,8 @@ var coverVid = function (elem, width, height) {
 		}
 
 	}
+
+	sizeVideo();
 };
 
 if (window.jQuery) {
