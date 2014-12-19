@@ -3,6 +3,7 @@
 @import "less/lib/prefixer";
 @import "less/adhesion";
 @import "less/share-modal.less";
+@import "less/lib/lesshat-prefixed.less";
 
 // Global variables
 @img-root: "../img";
@@ -25,6 +26,21 @@
     top: 50%;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
+}
+
+.horizontal-center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+}
+
+.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
 }
 
 html {
@@ -50,8 +66,6 @@ html {
 		font-size: 24px;
 	}
 }
-
-
 
 .slide-container {
 	position: absolute;
@@ -115,6 +129,32 @@ html {
 
     video {
     	height: 100%;
+    }
+}
+
+.filmstrip-outer-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .filmstrip-wrapper {
+        width: 720px;
+        height: 528px;
+        .center;
+    }
+
+    .filmstrip {
+        width: 100%;
+        height: 100%;
+        background-size: 5900% 100%;
+        background-image: url('../assets/filmstrip/output.jpg');
+        .backface-visibility(hidden);
+
+        &.animated {
+            .animation(filmstrip 3s);
+        }
     }
 }
 

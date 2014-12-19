@@ -6,10 +6,16 @@ var $currentTime = null;
 var $play = null;
 var $pause = null;
 var $goButton = null;
+var $filmstrip = $('.filmstrip-wrapper');
+var $filmstripWrapper = $('.filmstrip-outer-wrapper');
+var $video = null;
 
 // Global state
 var firstShareLoad = true;
 var audioFile = '/assets/audio/naught-or-nice-1-v121014.mp3';
+var filmstripAspectWidth = 720;
+var filmstripAspectHeight = 528;
+var filmstripAspectRatio = filmstripAspectWidth / filmstripAspectHeight;
 
 /*
  * Run on page load.
@@ -23,6 +29,7 @@ var onDocumentLoad = function(e) {
     $play = $('.play');
     $pause = $('.pause');
     $goButton = $('.js-go');
+    $video = $('.covervid-video');
 
     // Bind events
     $shareModal.on('shown.bs.modal', onShareModalShown);
@@ -30,6 +37,7 @@ var onDocumentLoad = function(e) {
     $play.on('click', onPlayClick);
     $pause.on('click', onPauseClick);
     $goButton.on('click', onGoClick);
+    $(window).on('resize', onWindowResize);
 
     // configure ZeroClipboard on share panel
     ZeroClipboard.config({ swfPath: 'js/lib/ZeroClipboard.swf' });
@@ -41,7 +49,52 @@ var onDocumentLoad = function(e) {
 
     getCommentCount(showCommentCount);
     setupAudio();
-    $('.covervid-video').coverVid(640, 360);
+    sizeFilmstrip();
+    setupCSSAnimations();
+    $video.coverVid(640, 360);
+    $video.on('ended', hideIntro);
+}
+
+var hideIntro = function() {
+    console.log(hideIntro);
+    $('.slide-card-closed .content-wrapper').fadeIn();
+    $('.slide-card-open .content-wrapper').fadeOut();
+}
+
+var sizeFilmstrip = function() {
+    var windowAspectRatio = $(window).width() / $(window).height();
+
+    if (windowAspectRatio < filmstripAspectRatio) {
+        console.log($filmstripWrapper.height())
+        var filmstripWidth = Math.ceil($filmstripWrapper.height() * filmstripAspectWidth) / filmstripAspectHeight;
+        $filmstrip.width(filmstripWidth + 'px').height('100%');
+    } else {
+        var filmstripHeight = Math.ceil($filmstripWrapper.width() * filmstripAspectHeight) / filmstripAspectWidth;
+        $filmstrip.height(filmstripHeight + 'px').width('100%');
+    }
+
+}
+
+var setupCSSAnimations = function() {
+    var prefixes = [ '-webkit-', '-moz-', '-o-', '' ];
+    var keyframes = '';
+    var filmstripSteps = 59;
+
+    for (var i = 0; i < prefixes.length; i++) {
+
+        var filmstrip = '';
+        for (var f = 0; f < filmstripSteps; f++) {
+            var currentPct = f * (100/filmstripSteps);
+            filmstrip += currentPct + '% {background-position:-' + (f * 100) + '% 0;' + prefixes[i] + 'animation-timing-function:steps(1);}';
+        }
+        keyframes += '@' + prefixes[i] + 'keyframes filmstrip {' + filmstrip + '}';
+    }
+
+    var test = 'h1 { color: red !important; }';
+
+    var $s = $('<style type="text/css"></style>');
+    $s.html(keyframes);
+    $('head').append($s);
 }
 
 /*
@@ -91,7 +144,14 @@ var onGoClick = function(e) {
     $pause.show();
     $('.player').addClass('slide-in');
     $('.slide-card-closed .content-wrapper').fadeOut();
-    $('.covervid-wrapper').css('opacity', 1);
+
+    if (Modernizr.touch) {
+        $filmstripWrapper.show();
+        $('.filmstrip').addClass('animated').on('animationend webkitAnimationEnd', hideIntro);
+    } else {
+        $('.covervid-wrapper').css('opacity', 1);
+        $video.get(0).play();
+    }
 }
 
 /*
@@ -157,5 +217,13 @@ var onClippyCopy = function(e) {
 
     _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'summary-copied']);
 }
+
+/*
+ * Window Resize
+ */
+var onWindowResize = _.throttle(function() {
+    console.log('resize');
+    sizeFilmstrip();
+}, 200);
 
 $(onDocumentLoad);
