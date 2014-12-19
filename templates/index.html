@@ -43,13 +43,6 @@
             </dl>
             {% endfor %}
 
-            {% for castmember in COPY.cast %}
-            <dl>
-                <dt>{{ castmember.name }}</dt>
-                <dd>{{ castmember.character }}</dd>
-            </dl>
-            {% endfor %}
-
             <h3>Production</h3>
             <p>Written by <span class="names">{{ COPY.content.writers }}</span></p>
             <p>Directed &amp; produced by <span class="names">{{ COPY.content.director_producer }}</span></p>
