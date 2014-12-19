@@ -12,7 +12,7 @@ var $video = null;
 
 // Global state
 var firstShareLoad = true;
-var audioFile = '/assets/audio/naught-or-nice-1-v121014.mp3';
+var audioFile = '/assets/audio/elves.mp3';
 var filmstripAspectWidth = 720;
 var filmstripAspectHeight = 528;
 var filmstripAspectRatio = filmstripAspectWidth / filmstripAspectHeight;
