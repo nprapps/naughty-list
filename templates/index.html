@@ -6,6 +6,8 @@
 
 {% block content %}
 
+<a class="logo" href="http://npr.org"><img src="./assets/npr-logo.svg"></a>
+
 <div class="slide-container">
     <div class="slide slide-card-closed">
         <div class="covervid-wrapper">
@@ -23,6 +25,7 @@
 
         <div class="content-wrapper">
             <a class="btn btn-lg btn-primary js-go" href="#"><i class="fa fa-play"></i> Go</a>
+            <p class="headphones"><i class="fa fa-headphones"></i> Put on your headphones</p>
         </div>
     </div>
 
@@ -51,7 +54,24 @@
             <p>Written by <span class="names">{{ COPY.content.writers }}</span></p>
             <p>Directed &amp; produced by <span class="names">{{ COPY.content.director_producer }}</span></p>
             <p>With production assistance from <span class="names">{{ COPY.content.production_assistant }}</span></p>
+            <p>Design and Development by <span class="names">{{ COPY.content.design_credit }}</span></p>
+            <p>Published {{ COPY.content.pubdate }}</p>
+
             <p class="promo">{{ COPY.content.truth_promo }}</p>
+
+
+
+            <footer>
+                <div class="secondary">
+                    <p>&copy;2014 NPR</p>
+                    <ul>
+                        <li id="footerContact"><a href="http://help.npr.org/npr/includes/customer/npr/custforms/contactus.aspx">Contact</a></li>
+                        <li><a href="http://www.npr.org/about/termsofuse.html">Terms of Use</a></li>
+                        <li><a href="http://www.npr.org/about/privacypolicy.html">Privacy</a></li>
+                        <li><a href="http://thin.npr.org/">Text-Only</a></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
     </div>
 
@@ -80,6 +100,8 @@
     </div> <!-- end #audio -->
 
     <a class="comment-button comment-button-article comment-drawer-toggle" data-toggle="modal" data-backdrop="static" data-target="#share-modal"><i class="fa fa-share"></i></a>
+
+    <a class="toggle-credits-button">Credits</a>
 </div>
 
 {% endblock %}

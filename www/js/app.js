@@ -14,6 +14,7 @@ var $videoWrapper = null;
 var $credits = null;
 var $slideCardOpen = null;
 var $slideCardClosed = null;
+var $creditsButton = null;
 
 // Global state
 var firstShareLoad = true;
@@ -42,6 +43,7 @@ var onDocumentLoad = function(e) {
     $playerWrapper = $('.player');
     $slideCardOpen = $('.slide-card-open');
     $slideCardClosed = $('.slide-card-closed');
+    $creditsButton = $('.toggle-credits-button');
 
 
     // Bind events
@@ -50,6 +52,7 @@ var onDocumentLoad = function(e) {
     $play.on('click', onPlayClick);
     $pause.on('click', onPauseClick);
     $goButton.on('click', onGoClick);
+    $creditsButton.on('click', onCreditsButtonClick);
     $(window).on('resize', onWindowResize);
 
     // configure ZeroClipboard on share panel
@@ -66,6 +69,12 @@ var onDocumentLoad = function(e) {
     setupCSSAnimations();
     $video.coverVid(1280, 720);
     $video.on('ended', hideIntro);
+}
+
+var onCreditsButtonClick = function() {
+    $credits.fadeToggle();
+    console.log('toggle')
+
 }
 
 var hideIntro = function() {
@@ -125,7 +134,6 @@ var setupAudio = function() {
 
 var onAudioEnded = function(e) {
     $credits.fadeIn();
-    $playerWrapper.fadeOut();
 }
 
 /*
@@ -147,13 +155,16 @@ var onGoClick = function(e) {
     $('.player').addClass('slide-in');
     $('.slide-card-closed .content-wrapper').fadeOut();
 
-    if (Modernizr.touch) {
-        $filmstripWrapper.show();
-        $('.filmstrip').addClass('animated').on('animationend webkitAnimationEnd', hideIntro);
-    } else {
-        $('.covervid-wrapper').css('opacity', 1);
-        $video.get(0).play();
-    }
+    _.delay(function() {
+        if (Modernizr.touch) {
+            $filmstripWrapper.show();
+            $('.filmstrip').addClass('animated').on('animationend webkitAnimationEnd', hideIntro);
+        } else {
+            $('.covervid-wrapper').css('opacity', 1);
+            $video.get(0).play();
+        }
+    }, 3000);
+
 }
 
 /*

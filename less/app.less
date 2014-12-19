@@ -67,6 +67,19 @@ html {
 	}
 }
 
+.logo {
+	display: block;
+	position: absolute;
+	left: 2rem;
+	top: 2rem;
+	z-index: 10;
+
+	img {
+		height: 2rem;
+		width: auto;
+	}
+}
+
 .slide-container {
 	position: absolute;
 	top: 0;
@@ -107,6 +120,19 @@ html {
 	.btn {
 		text-transform: uppercase;
 		.border-radius(0);
+		border: none;
+		margin-bottom: 1rem;
+		letter-spacing: 0.1rem;
+
+		margin-left: -33.3333%;
+	}
+
+	.headphones {
+		color: #fff;
+		margin-left: -33.3333%;
+		text-transform: uppercase;
+		letter-spacing: 0.1rem;
+		font-size: @font-size-small;
 	}
 }
 
@@ -119,17 +145,12 @@ html {
 }
 
 .slide-credits {
+	z-index: 50;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 	text-align: center;
 	display: none;
-	background-image:
-		linear-gradient(
-		      darken(fadeout(@green, 60%), 40%),
-		      darken(fadeout(@green, 60%), 40%)
-		    );
-    background-size: cover;
-    background-position: center center;
+	background: darken(fadeout(@green, 50%), 80%);
 
 	.content-wrapper {
 		padding: 4rem 1rem;
@@ -294,6 +315,7 @@ html {
 			position: absolute;
 			left: 0;
 			top: 0;
+			cursor: pointer;
 		}
 
 		.bar {
@@ -348,8 +370,11 @@ html {
 	}
 }
 
-.comment-drawer-toggle {
+.comment-drawer-toggle,
+.comment-drawer-toggle:hover,
+.comment-drawer-toggle.visited {
 	position: absolute;
+	z-index: 10;
 	top: 2rem;
 	right: 2rem;
 	border: 1px solid #fff;
@@ -358,4 +383,37 @@ html {
 	text-align: center;
 	line-height: 2rem;
 	vertical-align: middle;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.toggle-credits-button,
+.toggle-credits-button:hover,
+.toggle-credits-button:visited {
+	position: absolute;
+	z-index: 200;
+	top: 2rem;
+	right: 5rem;
+	border: 1px solid #fff;
+	color: #fff;
+	height: 2rem;
+	padding: 0 1rem;
+	text-align: center;
+	line-height: 2rem;
+	vertical-align: middle;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
+	font-size: @font-size-small;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+footer {
+	font-size: @font-size-small;
+
+	li {
+		display: inline-block;
+		margin-right: 2rem;
+	}
+
 }
