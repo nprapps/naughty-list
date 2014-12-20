@@ -297,6 +297,11 @@ html {
 	background: fadeout(#333, 20%);
 	line-height: 5rem;
 
+	.no-touch & {
+		line-height: 3rem;
+		height: 3rem;
+	}
+
 	&.slide-in {
 		.translate(0,0);
 	}
@@ -317,12 +322,20 @@ html {
 		bottom: 0;
 		right: 0;
 
+		.no-touch & {
+			left: 3rem;
+		}
+
 		.jp-seek-bar {
 			height: 5rem;
 			position: absolute;
 			left: 0;
 			top: 0;
 			cursor: pointer;
+
+			.no-touch & {
+				height: 3rem;
+			}
 		}
 
 		.bar {
@@ -332,6 +345,10 @@ html {
 			bottom: 0;
 			left: 0;
 			background-color: fadeout(#999, 80%);
+
+			.no-touch & {
+				height: 3rem;
+			}
 		}
 	}
 	.playback-info {
@@ -340,6 +357,10 @@ html {
 		text-align: right;
 		line-height: 1;
 		position: absolute;
+
+		.no-touch & {
+			top: 1rem;
+		}
 	}
 
 	.current-time {
@@ -359,6 +380,12 @@ html {
 	line-height: 5rem;
 	text-align: center;
 	font-size: @font-size-base * 3;
+
+	.no-touch & {
+		.square(3rem);
+		line-height: 3rem;
+		font-size: @font-size-large;
+	}
 
 
 	.no-touch & {
