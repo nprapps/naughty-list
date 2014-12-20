@@ -54,7 +54,7 @@ var onDocumentLoad = function(e) {
     $play.on('click', onPlayClick);
     $pause.on('click', onPauseClick);
     $goButton.on('click', onGoClick);
-    $creditsButton.on('click', onCreditsButtonClick);
+    $creditsButton.on('click', toggleCredits);
     $downloadButton.on('click', onDownloadButtonClick);
     $(window).on('resize', onWindowResize);
 
@@ -78,8 +78,14 @@ var onDownloadButtonClick = function() {
     _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'download audio']);
 }
 
-var onCreditsButtonClick = function() {
-    $credits.fadeToggle();
+var toggleCredits = function() {
+    if ($creditsButton.text() === 'Credits') {
+        $creditsButton.text('Close');
+        $credits.fadeIn();
+    } else {
+        $creditsButton.text('Credits');
+        $credits.fadeOut();
+    }
 }
 
 var hideIntro = function() {
@@ -138,7 +144,7 @@ var setupAudio = function() {
 }
 
 var onAudioEnded = function(e) {
-    $credits.fadeIn();
+    toggleCredits();
     $pause.hide();
     $play.show();
 
@@ -163,7 +169,7 @@ var onGoClick = function(e) {
     $pause.show();
     $('.player').addClass('slide-in');
     $('.slide-card-closed .content-wrapper').fadeOut();
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'start audio']);
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'audio started']);
 
     _.delay(function() {
         if (Modernizr.touch) {
@@ -245,7 +251,6 @@ var onClippyCopy = function(e) {
  * Window Resize
  */
 var onWindowResize = _.throttle(function() {
-    console.log('resize');
     sizeFilmstrip();
 }, 200);
 
