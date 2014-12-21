@@ -74,8 +74,8 @@ html {
 .logo {
 	display: block;
 	position: absolute;
-	left: 2rem;
-	top: 2rem;
+	left: 1rem;
+	top: 1rem;
 	z-index: 10;
 
 	img {
@@ -155,13 +155,17 @@ html {
 	-webkit-overflow-scrolling: touch;
 	text-align: center;
 	display: none;
-	background: darken(fadeout(@green, 50%), 80%);
+	background: darken(fadeout(@green, 20%), 50%);
 
 	.content-wrapper {
 		padding: 4rem 1rem;
 		max-width: 600px;
 		margin: 0 auto;
 		color: #fff;
+
+		@media screen and (max-width: 480px){
+			padding: 4rem;
+		}
 
 		.share-prompt {
 			font-size: @font-size-large;
@@ -410,8 +414,8 @@ html {
 .comment-drawer-toggle.visited {
 	position: absolute;
 	z-index: 10;
-	top: 2rem;
-	right: 2rem;
+	top: 1rem;
+	right: 1rem;
 	border: 1px solid #fff;
 	color: #fff;
 	.square(2rem);
@@ -426,9 +430,8 @@ html {
 .toggle-credits-button:hover,
 .toggle-credits-button:visited {
 	position: absolute;
-	z-index: 200;
-	top: 2rem;
-	right: 5rem;
+	top: 1rem;
+	right: 4rem;
 	border: 1px solid #fff;
 	color: #fff;
 	height: 2rem;
@@ -441,6 +444,28 @@ html {
 	font-size: @font-size-small;
 	text-decoration: none;
 	cursor: pointer;
+
+	.slide-credits & {
+		right: 1rem;
+		.square(2rem);
+		font-size: @font-size-large;
+		text-transform: uppercase;
+		line-height: 1.8rem;
+		padding: 0;
+		position: fixed;
+	}
+}
+
+.toggle-credits-button,
+.comments-button {
+	.transition(opacity 0.2s ease-in-out);
+}
+
+.credits-open .slide-container {
+	> .toggle-credits-button,
+	> .comment-button {
+		opacity: 0;
+	}
 }
 
 footer {

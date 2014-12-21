@@ -1,4 +1,5 @@
 // Global jQuery references
+var $body = null;
 var $shareModal = null;
 var $commentCount = null;
 var $audioPlayer = null;
@@ -29,6 +30,7 @@ var filmstripAspectRatio = filmstripAspectWidth / filmstripAspectHeight;
  */
 var onDocumentLoad = function(e) {
     // Cache jQuery references
+    $body = $('body');
     $shareModal = $('#share-modal');
     $commentCount = $('.comment-count');
     $audioPlayer = $('#audio-player');
@@ -79,12 +81,12 @@ var onDownloadButtonClick = function() {
 }
 
 var toggleCredits = function() {
-    if ($creditsButton.text() === 'Credits') {
-        $creditsButton.text('Close');
-        $credits.fadeIn();
-    } else {
-        $creditsButton.text('Credits');
+    if ($body.hasClass('credits-open')) {
         $credits.fadeOut();
+        $body.removeClass('credits-open');
+    } else {
+        $credits.fadeIn();
+        $body.addClass('credits-open');
     }
 }
 
@@ -144,7 +146,9 @@ var setupAudio = function() {
 }
 
 var onAudioEnded = function(e) {
-    toggleCredits();
+    if (!$body.hasClass('credits-open')){
+        toggleCredits();
+    }
     $pause.hide();
     $play.show();
 
