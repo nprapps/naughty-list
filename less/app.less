@@ -157,15 +157,26 @@ html {
 	display: none;
 	background: darken(fadeout(@green, 20%), 50%);
 
+	@media screen and (max-width: 480px){
+		&:before {
+			content: ' ';
+			display: block;
+			width: 100%;
+			height: 4rem;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 60;
+			background: rgba(0,0,0,0.7);
+		}
+	}
+
+
 	.content-wrapper {
 		padding: 4rem 1rem;
 		max-width: 600px;
 		margin: 0 auto;
 		color: #fff;
-
-		@media screen and (max-width: 480px){
-			padding: 4rem 4rem 4rem 1rem;
-		}
 
 		.share-prompt {
 			font-size: @font-size-large;
@@ -440,10 +451,11 @@ html {
 	line-height: 2rem;
 	vertical-align: middle;
 	text-transform: uppercase;
-	letter-spacing: 0.1rem;
+	letter-spacing: .1rem;
 	font-size: @font-size-small;
 	text-decoration: none;
 	cursor: pointer;
+
 
 	.slide-credits & {
 		right: 1rem;
@@ -453,6 +465,7 @@ html {
 		line-height: 1.8rem;
 		padding: 0;
 		position: fixed;
+		z-index: 70;
 	}
 }
 
